@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="75" height="68" viewBox="0 0 75 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 85">
+<g id="Ellipse 2" filter="url(#filter0_d_0_10)">
+<ellipse cx="37.5" cy="30" rx="33.5" ry="30" fill="#3183D4" fill-opacity="0.53" shape-rendering="crispEdges"/>
+</g>
+<g id="bx:qr">
+<path id="Vector" d="M25.25 28.5833H36.5833V17.25H25.25V28.5833ZM28.0833 20.0833H33.75V25.75H28.0833V20.0833ZM25.25 42.75H36.5833V31.4167H25.25V42.75ZM28.0833 34.25H33.75V39.9167H28.0833V34.25ZM39.4167 17.25V28.5833H50.75V17.25H39.4167ZM47.9167 25.75H42.25V20.0833H47.9167V25.75ZM39.4308 31.4167H42.2642V34.25H39.4308V31.4167ZM42.2642 34.25H45.0975V37.0833H42.2642V34.25ZM39.4308 37.0833H42.2642V39.9167H39.4308V37.0833ZM45.0975 37.0833H47.9308V39.9167H45.0975V37.0833ZM47.9308 39.9167H50.7642V42.75H47.9308V39.9167ZM42.2642 39.9167H45.0975V42.75H42.2642V39.9167ZM45.0975 31.4167H47.9308V34.25H45.0975V31.4167ZM47.9308 34.25H50.7642V37.0833H47.9308V34.25Z" fill="black"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_10" x="0" y="0" width="75" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_10"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_10" result="shape"/>
+</filter>
+</defs>
+</svg>

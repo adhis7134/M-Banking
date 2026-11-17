@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BANK-KU M-Banking — Figma Interactive Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Switcher for Quick Testing -->
+  <header class="app-toolbar">
+    <div class="toolbar-brand">
+      <span>BANK-KU M-Banking</span>
+      <span id="db-status-badge" class="badge clickable" onclick="openDatabaseInspector()" title="Klik untuk melihat isi tabel SQLite">SQLite DB: Aktif (mbanking.db)</span>
+    </div>
+    <div class="screen-pills">
+      <button class="screen-pill" data-screen="onboarding" onclick="navigateTo('onboarding')">1. Awal</button>
+      <button class="screen-pill" data-screen="welcome" onclick="navigateTo('welcome')">2. Pra-Login</button>
+      <button class="screen-pill" data-screen="login" onclick="navigateTo('login')">3. Login</button>
+      <button class="screen-pill active" data-screen="home" onclick="navigateTo('home')">4. Beranda</button>
+      <button class="screen-pill" data-screen="qr-terima" onclick="navigateTo('qr-terima')">5. QR Terima</button>
+      <button class="screen-pill" data-screen="qr-scan" onclick="navigateTo('qr-scan')">6. Scan QRIS</button>
+      <button class="screen-pill" data-screen="virtual-account" onclick="navigateTo('virtual-account')">7. Virtual Akun</button>
+      <button class="screen-pill" data-screen="transfer" onclick="navigateTo('transfer')">8. Transfer</button>
+      <button class="screen-pill" data-screen="topup" onclick="navigateTo('topup')">9. Top Up</button>
+      <button class="screen-pill" data-screen="pulsa" onclick="navigateTo('pulsa')">10. Pulsa</button>
+      <button class="screen-pill" data-screen="history" onclick="navigateTo('history')">11. Riwayat</button>
+      <button class="screen-pill" data-screen="settings" onclick="navigateTo('settings')">12. Pengaturan</button>
+      <button class="screen-pill" style="background:rgba(16,185,129,0.22); color:#6ee7b7; border-color:rgba(16,185,129,0.4);" onclick="openDatabaseInspector()">🗄️ Lihat Database</button>
+    </div>
+  </header>
+
+  <!-- iPhone 16 Frame (393 x 852) -->
+  <main class="phone-shell">
+    <div class="phone-viewport">
+
+      <!-- Toast Notification -->
+      <div id="app-toast" class="toast-msg">Berhasil disalin!</div>
+
+      <!-- =========================================================
+           SCREEN 1: ONBOARDING / PILIH REKENING (iPhone 16 - 5, node 54:7)
+           ========================================================= -->
+      <section id="screen-onboarding" class="screen" data-node-id="54:7">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Logo BANK-KU -->
+          <div style="position:absolute; left:103px; top:265px; width:188.36px; height:241px;">
+            <img src="assets/dcb05.svg" alt="BANK-KU Logo" style="display:block; width:188.36px; height:241px;" />
+          </div>
+          <p style="position:absolute; left:148px; top:511px; font-size:20px; font-weight:800; color:#000; white-space:nowrap;">
+            BANK-KU
+          </p>
+
+          <!-- Sudah Memiliki Rekening -->
+          <div class="clickable" onclick="navigateTo('debit-card')" style="position:absolute; left:14px; top:640px; width:365px; height:54px; border-radius:100px; background-image:linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%), linear-gradient(90deg, rgba(49,131,212,0.3) 28.365%, rgba(11,146,92,0.3) 71.154%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:600; background:linear-gradient(90deg, #3183d4, #0b925c); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+              Sudah Memiliki Rekening
+            </span>
+          </div>
+
+          <!-- Belum Punya Rekening -->
+          <div class="clickable" onclick="navigateTo('tabungan')" style="position:absolute; left:14px; top:729px; width:365px; height:54px; border-radius:100px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:600; color:#ffffff;">
+              Belum Punya Rekening
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 1B: BUKA TABUNGAN (iPhone 16 - 7, node 54:15)
+           ========================================================= -->
+      <section id="screen-tabungan" class="screen" data-node-id="54:15">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Back Arrow -->
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:24px; top:66px; width:34px; height:34px;">
+            <img src="assets/da4c0.svg" alt="Kembali" style="display:block; width:34px; height:34px;" />
+          </div>
+          <p style="position:absolute; left:130px; top:66px; font-size:24px; font-weight:600; color:#000;">
+            Tabungan
+          </p>
+
+          <!-- Card Container -->
+          <div style="position:absolute; left:22px; top:138px; width:349px; height:633px; border-radius:15px; box-shadow:0 4px 4px rgba(0,0,0,0.25); background-image:linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%), linear-gradient(180deg, rgba(127,181,234,0.55) 0%, rgba(98,162,136,0.55) 100%);"></div>
+
+          <!-- Illustration -->
+          <div style="position:absolute; left:113.58px; top:202.02px; width:164.84px; height:155.97px; display:flex; align-items:center; justify-content:center;">
+            <div style="transform:rotate(-35.5deg); width:134px; height:96px;">
+              <img src="assets/b88c5.svg" alt="" style="display:block; width:134px; height:96px;" />
+            </div>
+          </div>
+          <div style="position:absolute; left:93px; top:212px; width:136px; height:136px;">
+            <img src="assets/65da7.svg" alt="" style="position:absolute; left:23.43%; top:0; width:60.95%; height:100%;" />
+          </div>
+          <div style="position:absolute; left:177px; top:212px; width:136px; height:136px;">
+            <img src="assets/fce28.svg" alt="" style="position:absolute; left:17.7%; top:0; width:64.54%; height:100%;" />
+          </div>
+
+          <p style="position:absolute; left:58px; top:448px; width:284px; font-size:20px; font-weight:700; color:#000; text-align:center; line-height:1.3;">
+            Nabung Gak Pake Modal, Setoran Awal Rp 0
+          </p>
+          <p style="position:absolute; left:61px; top:536px; width:281px; font-size:16px; font-weight:400; color:rgba(0,0,0,0.6); text-align:center; line-height:1.35;">
+            Wujudkan mimpimu hari ini. Buka tabungan mudah hanya dengan e-KTP, tanpa minumum setoran.
+          </p>
+
+          <div class="clickable" onclick="navigateTo('debit-card')" style="position:absolute; left:31px; top:676px; width:331px; height:51px; border-radius:25px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:600; color:#fff;">Buka Tabungan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 1C: MASUKAN DATA KARTU DEBIT (iPhone 16 - 6, node 54:11)
+           ========================================================= -->
+      <section id="screen-debit-card" class="screen" data-node-id="54:11">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:12px; top:54px; width:47px; height:47px;">
+            <img src="assets/60432.svg" alt="Kembali" style="display:block; width:47px; height:47px;" />
+          </div>
+          <p style="position:absolute; left:28px; top:128px; width:338px; font-size:24px; font-weight:700; color:#000;">
+            Masukan Data Kartu Debit
+          </p>
+          <p style="position:absolute; left:28px; top:166px; width:338px; font-size:13px; color:rgba(0,0,0,0.6);">
+            Daftarkan kartu debit Anda untuk membuat Password & PIN M-Banking baru.
+          </p>
+
+          <!-- Nama Pemilik Kartu Input -->
+          <p style="position:absolute; left:29px; top:252px; font-size:14px; color:rgba(0,0,0,0.6);">
+            Nama Lengkap Sesuai Kartu / KTP
+          </p>
+          <div style="position:absolute; left:29px; top:278px; width:335px; height:54px; background:rgba(217,217,217,0.5); border:1px solid #3183d4; border-radius:10px; display:flex; align-items:center; padding:0 18px;">
+            <input id="reg-card-holder" type="text" class="clean-input" placeholder="Contoh: Budi Santoso" style="width:100%; font-size:16px;" />
+          </div>
+
+          <!-- Nomor Kartu Input -->
+          <p style="position:absolute; left:29px; top:358px; font-size:14px; color:rgba(0,0,0,0.6);">
+            16 Digit Nomor Kartu Debit
+          </p>
+          <div style="position:absolute; left:29px; top:386px; width:335px; height:58px; background:rgba(217,217,217,0.5); border:1px solid #3183d4; border-radius:10px; display:flex; align-items:center; padding:0 18px;">
+            <input id="reg-card-number" type="text" class="clean-input" placeholder="Nomor Kartu (Contoh: 453288990011)" maxlength="19" style="width:100%; font-size:16px;" />
+          </div>
+
+          <p style="position:absolute; left:29px; top:456px; font-size:16px; color:rgba(0,0,0,0.5);">
+            Masa Berlaku Kartu
+          </p>
+
+          <!-- Bulan -->
+          <div style="position:absolute; left:28px; top:493px; width:165px; height:58px; background:rgba(217,217,217,0.5); border:1px solid #3183d4; border-radius:10px; display:flex; align-items:center; padding:0 18px;">
+            <input id="reg-card-month" type="text" class="clean-input" placeholder="Bulan (MM)" value="12" maxlength="2" style="width:100%; font-size:16px;" />
+          </div>
+
+          <!-- Tahun -->
+          <div style="position:absolute; left:203px; top:493px; width:165px; height:58px; background:rgba(217,217,217,0.5); border:1px solid #3183d4; border-radius:10px; display:flex; align-items:center; padding:0 18px;">
+            <input id="reg-card-year" type="text" class="clean-input" placeholder="Tahun (YY)" value="29" maxlength="2" style="width:100%; font-size:16px;" />
+          </div>
+
+          <!-- Lanjutkan ke Buat Password -->
+          <div class="clickable" onclick="proceedFromDebitCard()" style="position:absolute; left:29px; top:647px; width:335px; height:66px; border-radius:100px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:24px; font-weight:600; color:#fff;">Lanjutkan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 1D: BUAT PASSWORD BARU (iPhone 16 - 38, node 222:182)
+           ========================================================= -->
+      <section id="screen-create-password" class="screen" data-node-id="222:182">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:13px; top:31px; width:34px; height:34px;">
+            <img src="assets/da4c0.svg" alt="Kembali" style="display:block; width:34px; height:34px;" />
+          </div>
+
+          <!-- Key Icon -->
+          <div style="position:absolute; left:166px; top:96px; width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, rgba(49,131,212,0.18), rgba(11,146,92,0.18)); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            🔑
+          </div>
+
+          <p style="position:absolute; left:0; top:175px; width:393px; font-size:24px; font-weight:700; color:#000; text-align:center;">
+            Buat Password
+          </p>
+          <p style="position:absolute; left:48px; top:223px; width:298px; font-size:14px; color:rgba(0,0,0,0.65); text-align:center; line-height:1.4;">
+            Password dipakai untuk login ke Aplikasi, Jangan bagikan kesiapapun ya!
+          </p>
+
+          <!-- Password Box -->
+          <div style="position:absolute; left:36px; top:320px; width:320px; height:72px; border-radius:14px; background:#f1f5f9; border:1.5px solid #3183d4; padding:10px 16px;">
+            <label style="font-size:12px; color:#3183d4; font-weight:600; display:block;">Password Login Baru</label>
+            <input id="reg-new-password" type="text" class="clean-input" placeholder="Ketik password baru Anda..." style="width:100%; font-size:18px; font-weight:600; margin-top:4px;" />
+          </div>
+
+          <!-- Rules Checklist Box (sesuai Figma Rectangle 29) -->
+          <div style="position:absolute; left:36px; top:408px; width:320px; height:145px; border-radius:14px; background:#f8fafc; border:1px solid #cbd5e1; padding:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <span style="font-size:13.5px; color:#1e293b;">Minimum 6 - 8 Karakter</span>
+              <span style="color:#0b925c; font-weight:800;">✓</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <span style="font-size:13.5px; color:#1e293b;">Kombinasi huruf dan angka</span>
+              <span style="color:#0b925c; font-weight:800;">✓</span>
+            </div>
+            <div style="font-size:12px; color:#64748b; margin-top:6px;">
+              Selanjutnya Anda akan membuat 6 digit PIN Transaksi.
+            </div>
+          </div>
+
+          <div class="clickable" onclick="proceedFromCreatePassword()" style="position:absolute; left:23px; top:702px; width:348px; height:54px; border-radius:100px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:600; color:#fff;">Lanjutkan Buat PIN</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 2: PRE-LOGIN / WELCOME (iPhone 16 - 2, node 2:3)
+           ========================================================= -->
+      <section id="screen-welcome" class="screen" data-node-id="2:3">
+        <div style="position:absolute; inset:0; background:#e3e3e3;">
+
+          <!-- Top Link to Onboarding -->
+          <div class="clickable" onclick="navigateTo('onboarding')" style="position:absolute; right:16px; top:24px; font-size:12px; font-weight:600; color:#0b925c; background:rgba(255,255,255,0.8); padding:6px 12px; border-radius:20px; z-index:5;">
+            Buka Rekening Baru &rarr;
+          </div>
+
+          <!-- Banner Tips Aman Bertransaksi -->
+          <div style="position:absolute; left:14.01px; top:312px; width:362.99px; height:138px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); box-shadow:0 4px 8px rgba(0,0,0,0.2);"></div>
+
+          <!-- Lock Icon -->
+          <div style="position:absolute; left:227.75px; top:318.84px; width:56.84px; height:57.31px;">
+            <img src="assets/2ab39.svg" alt="Lock" style="display:block; width:56.84px; height:60.54px;" />
+          </div>
+
+          <p style="position:absolute; left:154.4px; top:372px; width:195.53px; height:67px; font-size:24px; font-weight:600; color:#fff; text-align:center; text-shadow:4px 5px 4px rgba(0,0,0,0.25); line-height:1.25;">
+            Tips Aman Bertransaksi
+          </p>
+
+          <!-- Decorative Avatars / Characters on Banner -->
+          <div style="position:absolute; left:9px; top:304px; width:86.3px; height:86.68px; display:flex; align-items:center; justify-content:center;">
+            <div style="transform:rotate(149.79deg) scaleY(-1); width:63.64px; height:63px; border-radius:35px; overflow:hidden;">
+              <img src="assets/af67c.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+          </div>
+          <div style="position:absolute; left:81.41px; top:305.79px; width:76.67px; height:77.31px; display:flex; align-items:center; justify-content:center;">
+            <div style="transform:rotate(15.12deg); width:62.64px; height:63.09px; border-radius:30px; overflow:hidden;">
+              <img src="assets/82ca4.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+          </div>
+          <div style="position:absolute; left:35.37px; top:335.42px; width:108.74px; height:114.58px; overflow:hidden; filter:drop-shadow(7px 0px 4px rgba(0,0,0,0.25));">
+            <img src="assets/c29b1.png" alt="" style="position:absolute; left:0; top:0; width:100%; height:153.47%; object-fit:cover;" />
+          </div>
+
+          <!-- Bottom White Rounded Sheet -->
+          <div style="position:absolute; left:-1px; top:553px; width:393px; height:482px;">
+            <img src="assets/6834e.svg" alt="" style="display:block; width:393px; height:482px;" />
+          </div>
+
+          <!-- QR Bayar Button -->
+          <div class="clickable" onclick="navigateTo('qr-scan')" style="position:absolute; left:105px; top:601px; width:67px; height:63px;">
+            <img src="assets/cdc8e.svg" alt="QR Bayar" style="display:block; width:67px; height:63px;" />
+          </div>
+          <p style="position:absolute; left:107px; top:703px; font-size:14px; color:#000; white-space:nowrap;">
+            QR Bayar
+          </p>
+
+          <!-- QR Terima Button -->
+          <div class="clickable" onclick="navigateTo('qr-terima')" style="position:absolute; left:229px; top:604px; width:67px; height:60px;">
+            <img src="assets/b8ce7.svg" alt="QR Terima" style="display:block; width:75px; height:68px; margin-left:-4px;" />
+          </div>
+          <p style="position:absolute; left:223px; top:703px; font-size:14px; color:#000; white-space:nowrap;">
+            QR Terima
+          </p>
+
+          <!-- Login Button -->
+          <div class="clickable" onclick="navigateTo('login')" style="position:absolute; left:23px; top:763px; width:353px; height:62px; border-radius:100px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:24px; font-weight:600; color:#ffffff;">Login</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 3: LOGIN (iPhone 16 - 3, node 2:5)
+           ========================================================= -->
+      <section id="screen-login" class="screen" data-node-id="2:5">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Coin Background -->
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Back Button -->
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:11px; top:36px; width:34px; height:34px; z-index:5;">
+            <img src="assets/da4c0.svg" alt="Kembali" style="display:block; width:34px; height:34px;" />
+          </div>
+
+          <!-- BANK-KU Logo -->
+          <div style="position:absolute; left:103px; top:91px; width:188.36px; height:241px; z-index:2;">
+            <img src="assets/dcb05.svg" alt="BANK-KU" style="display:block; width:189.36px; height:242.17px;" />
+          </div>
+          <p style="position:absolute; left:147px; top:340px; font-size:20px; font-weight:800; color:#000; z-index:2;">
+            BANK-KU
+          </p>
+
+          <!-- Pilihan Akun Terdaftar (Memudahkan ganti akun yang baru dibuat) -->
+          <div style="position:absolute; left:29px; top:370px; width:335px; z-index:4;">
+            <select id="login-account-selector" onchange="onSelectLoginAccount(this.value)" style="width:100%; padding:6px 12px; border-radius:12px; border:1px solid #0b925c; background:#f8fafc; font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:600; color:#0f172a; cursor:pointer;">
+              <option value="1">Akun: Joni Sutanto (Rek: 123-456-7890)</option>
+            </select>
+          </div>
+
+          <!-- Password Input Box -->
+          <div style="position:absolute; left:29px; top:412px; width:335px; height:58px; background:#d9d9d9; border:1px solid #3183d4; border-radius:20px; display:flex; align-items:center; padding:0 20px; z-index:3;">
+            <input id="login-password-input" type="password" class="clean-input" placeholder="Masukkan Password..." value="bankku123" style="width:100%; font-size:16px;" />
+          </div>
+
+          <!-- Masuk Button -->
+          <div class="clickable" onclick="handleLogin(false)" style="position:absolute; left:20px; top:505px; width:353px; height:62px; border-radius:100px; background:linear-gradient(90deg, #3183d4 0%, #0b925c 100%); display:flex; align-items:center; justify-content:center; z-index:3;">
+            <span style="font-size:24px; font-weight:600; color:#fff;">Masuk</span>
+          </div>
+
+          <!-- Lupa Password -->
+          <p class="clickable" onclick="navigateTo('debit-card')" style="position:absolute; left:114px; top:607px; width:166px; font-size:20px; color:#3183d4; text-align:center; z-index:3;">
+            Lupa Password?
+          </p>
+
+          <!-- Fingerprint Button -->
+          <div class="clickable" onclick="handleLogin(true)" style="position:absolute; left:155px; top:676px; width:83px; height:83px; z-index:3;">
+            <img src="assets/616f0.svg" alt="Fingerprint" style="display:block; width:83px; height:83px;" />
+          </div>
+          <p style="position:absolute; left:91px; top:775px; font-size:16px; color:#209a65; white-space:nowrap; z-index:3;">
+            Masuk Dengan Finger Print
+          </p>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 4: HOME DASHBOARD (iPhone 16 - 4, node 21:33)
+           ========================================================= -->
+      <section id="screen-home" class="screen active" data-node-id="21:33">
+        <div style="position:absolute; inset:0; background:#d6d6d6;">
+          <!-- Top Gradient Background -->
+          <div style="position:absolute; left:0; top:0; width:393px; height:447px; background:linear-gradient(180deg, #3183d4 0%, #0b925c 100%);"></div>
+
+          <!-- Profile Avatar & Greeting -->
+          <div class="clickable" onclick="navigateTo('settings')" style="position:absolute; left:27px; top:50px; width:44.69px; height:44.69px;">
+            <img src="assets/d344f.svg" alt="Profile" style="display:block; width:44.69px; height:44.69px;" />
+          </div>
+          <p style="position:absolute; left:80px; top:62px; width:259px; font-size:16px; color:#fff; white-space:nowrap;">
+            <span>Selamat Pagi, </span>
+            <strong id="home-user-name" style="font-weight:800;">Joni Sutanto</strong>
+          </p>
+
+          <!-- Notification Bell -->
+          <div class="clickable" onclick="showToast('Tidak ada notifikasi baru')" style="position:absolute; left:339px; top:55px; width:36px; height:36px;">
+            <img src="assets/355c1.svg" alt="Notifikasi" style="display:block; width:36px; height:36px;" />
+          </div>
+
+          <!-- Saldo Saat Ini -->
+          <p style="position:absolute; left:51px; top:103px; font-size:16px; color:#fff;">
+            Saldo Saat Ini
+          </p>
+          <p id="home-balance-text" style="position:absolute; left:50px; top:121.4px; font-size:32px; font-weight:800; color:#fff; white-space:nowrap;">
+            Rp 7.505.000,00
+          </p>
+
+          <!-- Nomor Rekening & Salin -->
+          <p style="position:absolute; left:50.88px; top:184.13px; font-size:16px; font-weight:500; color:#fff;">
+            Nomor Rekening
+          </p>
+          <p id="home-account-number" style="position:absolute; left:50.88px; top:203.73px; font-size:16px; font-weight:500; color:#fff;">
+            123-456-7890
+          </p>
+          <div class="clickable" onclick="copyText(appState.accountNumber, 'Nomor Rekening')" style="position:absolute; left:243px; top:189px; width:120px; height:38px; border-radius:26px; background:linear-gradient(90deg, #2fc299 0%, #43ba99 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:800; color:#fff;">Salin</span>
+          </div>
+
+          <!-- Geser Ke Kanan Untuk Selengkapnya -->
+          <p style="position:absolute; left:14px; top:260px; font-size:12px; color:rgba(255,255,255,0.71);">
+            Geser Ke Kanan Untuk Selengakpnya
+          </p>
+
+          <!-- Horizontal Quick Action Menu (node 88:107) -->
+          <div class="quick-menu-scroll">
+            <!-- 1. QR TERIMA -->
+            <div class="quick-item" onclick="navigateTo('qr-terima')">
+              <div class="quick-icon-box">
+                <img src="assets/d9277.svg" alt="QR Terima" style="width:43.76px; height:41.63px; display:block;" />
+              </div>
+              <span class="quick-label">QR<br/>TERIMA</span>
+            </div>
+
+            <!-- 2. AKUN VIRTUAL -->
+            <div class="quick-item" onclick="navigateTo('virtual-account')">
+              <div class="quick-icon-box">
+                <img src="assets/9046b.svg" alt="Akun Virtual" style="width:43.22px; height:43.22px; display:block;" />
+              </div>
+              <span class="quick-label">AKUN<br/>VIRTUAL</span>
+            </div>
+
+            <!-- 3. TRANSFER -->
+            <div class="quick-item" onclick="navigateTo('transfer')">
+              <div class="quick-icon-box">
+                <div style="transform:rotate(89.45deg) scaleY(-1); width:31.29px; height:33.76px; display:flex; align-items:center; justify-content:center;">
+                  <img src="assets/b7d42.svg" alt="Transfer" style="width:31.29px; height:33.76px; display:block;" />
+                </div>
+              </div>
+              <span class="quick-label">TRANSFER</span>
+            </div>
+
+            <!-- 4. TOP UP -->
+            <div class="quick-item" onclick="navigateTo('topup')">
+              <div class="quick-icon-box">
+                <img src="assets/3f034.svg" alt="Top Up" style="width:34.76px; height:34.76px; display:block;" />
+              </div>
+              <span class="quick-label">TOP<br/>UP</span>
+            </div>
+
+            <!-- 5. RIWAYAT TRANSAKSI -->
+            <div class="quick-item" onclick="navigateTo('history')">
+              <div class="quick-icon-box">
+                <img src="assets/424b1.svg" alt="Riwayat" style="width:37.81px; height:37.81px; display:block;" />
+              </div>
+              <span class="quick-label" style="font-size:11.5px;">RIWAYAT<br/>TRANSAKSI</span>
+            </div>
+          </div>
+
+          <!-- White Main Card Background (node 76:60) -->
+          <div style="position:absolute; left:14px; top:397px; width:366px; height:409px;">
+            <img src="assets/f17de.svg" alt="" style="display:block; width:366px; height:409px;" />
+          </div>
+
+          <p style="position:absolute; left:42px; top:412px; width:310px; font-size:20px; font-weight:600; color:#000;">
+            Informasi Finansial Bulan Ini:
+          </p>
+
+          <!-- Total Pemasukan Card -->
+          <div class="clickable" onclick="navigateTo('history')" style="position:absolute; left:28px; top:453.89px; width:166px; height:152.11px; border-radius:25px; background-image:linear-gradient(90deg, rgba(0,255,38,0.36) 0%, rgba(0,255,38,0.36) 100%), linear-gradient(90deg, #d6d6d6 0%, #d6d6d6 100%);"></div>
+          <div style="position:absolute; left:86.31px; top:444px; width:42.24px; height:42.24px; transform:scaleY(-1);">
+            <img src="assets/8564e.svg" alt="Income" style="display:block; width:42.24px; height:42.24px;" />
+          </div>
+          <p style="position:absolute; left:37.17px; top:492.67px; font-size:14px; font-weight:500; color:#000;">
+            Total Pemasukan:
+          </p>
+          <p id="home-income-text" style="position:absolute; left:41.24px; top:521.58px; font-size:14px; font-weight:700; color:#000;">
+            Rp 50.000,00
+          </p>
+
+          <!-- Total Pengeluaran Card -->
+          <div class="clickable" onclick="navigateTo('history')" style="position:absolute; left:200px; top:453.89px; width:163px; height:152.11px; border-radius:25px; background-image:linear-gradient(90deg, rgba(255,0,0,0.46) 0%, rgba(255,0,0,0.46) 100%), linear-gradient(90deg, #d6d6d6 0%, #d6d6d6 100%);"></div>
+          <div style="position:absolute; left:261.07px; top:444px; width:41.86px; height:41.86px;">
+            <img src="assets/46480.svg" alt="Expense" style="display:block; width:41.86px; height:41.86px;" />
+          </div>
+          <p style="position:absolute; left:212px; top:493px; font-size:14px; font-weight:500; color:#000;">
+            Total Pengeluaran:
+          </p>
+          <p id="home-expense-text" style="position:absolute; left:216px; top:520px; font-size:14px; font-weight:700; color:#000;">
+            Rp 292.000,00
+          </p>
+
+          <!-- Transaksi Terakhir -->
+          <p style="position:absolute; left:26px; top:614px; font-size:20px; font-weight:600; color:#000;">
+            Transaksi Terakhir
+          </p>
+
+          <div id="home-recent-tx-container">
+            <!-- Row 1: Transfer Rupiah dari Nuel -->
+            <div style="position:absolute; left:31px; top:651px; width:27px; height:27px; transform:scaleY(-1);">
+              <img src="assets/53d13.svg" alt="" style="display:block; width:27px; height:27px;" />
+            </div>
+            <p style="position:absolute; left:66px; top:657px; font-size:14px; color:#000;">
+              Transfer Rupiah dari Nuel
+            </p>
+            <p style="position:absolute; left:250px; top:657px; font-size:14px; font-weight:700; color:#00e600;">
+              +Rp 50.000,00
+            </p>
+            <div style="position:absolute; left:36px; top:679px; width:316px; height:1px;">
+              <img src="assets/c167a.svg" alt="" style="display:block; width:316px; height:1px;" />
+            </div>
+
+            <!-- Row 2: Pembayaran Wifi -->
+            <div style="position:absolute; left:31px; top:681px; width:27px; height:27px;">
+              <img src="assets/fa829.svg" alt="" style="display:block; width:27px; height:27px;" />
+            </div>
+            <p style="position:absolute; left:66px; top:691px; font-size:14px; color:#000;">
+              Pembayaran Wifi
+            </p>
+            <p style="position:absolute; left:244px; top:691px; font-size:14px; font-weight:700; color:red;">
+              -Rp 257.000,00
+            </p>
+            <div style="position:absolute; left:36px; top:711px; width:316px; height:1px;">
+              <img src="assets/c167a.svg" alt="" style="display:block; width:316px; height:1px;" />
+            </div>
+
+            <!-- Row 3: Dimsum Mentai -->
+            <div style="position:absolute; left:31px; top:713px; width:27px; height:27px;">
+              <img src="assets/fa829.svg" alt="" style="display:block; width:27px; height:27px;" />
+            </div>
+            <p style="position:absolute; left:66px; top:717px; font-size:14px; color:#000;">
+              Dimsum Mentai
+            </p>
+            <p style="position:absolute; left:251px; top:719px; font-size:14px; font-weight:700; color:red;">
+              -Rp 35.000,00
+            </p>
+          </div>
+
+          <!-- Bottom Navigation Bar -->
+          <div style="position:absolute; left:-1px; top:784px; width:394px; height:68px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%);"></div>
+
+          <!-- Beranda Nav -->
+          <div class="clickable" onclick="navigateTo('home')" style="position:absolute; left:32px; top:786px; width:70px; text-align:center;">
+            <div style="width:36px; height:20px; margin:10px auto 6px;">
+              <img src="assets/4ff26.svg" alt="Beranda" style="display:block; width:36px; height:20px;" />
+            </div>
+            <span style="font-size:15px; color:#fff;">Beranda</span>
+          </div>
+
+          <!-- Center Floating QRIS Button -->
+          <div class="clickable" onclick="navigateTo('qr-scan')" style="position:absolute; left:158px; top:749px; width:77px; height:70px; border-radius:25px; border:2px solid #0d3155; box-shadow:0 4px 7px 2px rgba(0,0,0,0.4); background-image:linear-gradient(180deg, rgba(49,131,212,0.413) 0%, rgba(67,186,153,0.43) 100%), linear-gradient(90deg, #fff 0%, #fff 100%); display:flex; align-items:center; justify-content:center;">
+            <img src="assets/7ecb0.svg" alt="QRIS" style="display:block; width:48px; height:48px;" />
+          </div>
+          <div class="clickable" onclick="navigateTo('qr-scan')" style="position:absolute; left:162px; top:819px; width:70px; height:30px;">
+            <img src="assets/63737.png" alt="QRIS" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+
+          <!-- Pengaturan Nav -->
+          <div class="clickable" onclick="navigateTo('settings')" style="position:absolute; left:274px; top:785px; width:100px; text-align:center;">
+            <div style="width:41px; height:41px; margin:0 auto;">
+              <img src="assets/44e33.svg" alt="Pengaturan" style="display:block; width:41px; height:41px;" />
+            </div>
+            <span style="font-size:15px; color:#fff; display:block; margin-top:-2px;">Pengaturan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 5: QR TERIMA (iPhone 16 - 23, node 207:32)
+           ========================================================= -->
+      <section id="screen-qr-terima" class="screen" data-node-id="207:32">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p class="top-bar-title">QR TERIMA</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/b8630.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- QR Card Container -->
+          <div style="position:absolute; left:11px; top:157px; width:371px; height:572px; border-radius:15px; border:1px solid #000; background:linear-gradient(180deg, #0b925c 0%, #3183d4 100%); z-index:2;"></div>
+
+          <!-- QRIS Logo Top-Left -->
+          <div style="position:absolute; left:17px; top:175px; width:100px; height:43px; z-index:3;">
+            <img src="assets/63737.png" alt="QRIS" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+
+          <!-- BANK-KU Circle Badge Top-Right -->
+          <div style="position:absolute; left:308px; top:166px; width:63px; height:63px; z-index:3;">
+            <img src="assets/7786e.svg" alt="" style="display:block; width:65px; height:65px;" />
+            <img src="assets/d9e6e.svg" alt="" style="position:absolute; left:17px; top:5px; width:29.53px; height:36.42px;" />
+            <span style="position:absolute; left:9px; top:41px; font-size:9px; font-weight:800; color:#000;">BANK-KU</span>
+          </div>
+
+          <!-- Name & Account -->
+          <p id="qr-user-name" style="position:absolute; left:67px; top:224px; width:259px; font-size:20px; font-weight:800; color:#fff; text-align:center; z-index:3;">
+            Joni Sutanto
+          </p>
+          <p id="qr-account-number" class="clickable" onclick="copyText(appState.accountNumber, 'Nomor Rekening')" style="position:absolute; left:61px; top:250px; width:272px; font-size:16px; color:#fff; text-align:center; z-index:3;">
+            BANK-KU : 123-456-7890
+          </p>
+
+          <!-- White QR Box -->
+          <div style="position:absolute; left:60px; top:282px; width:273px; height:273px; border-radius:10px; background:#ffffff; z-index:3;"></div>
+          <div style="position:absolute; left:68px; top:290px; width:258px; height:258px; z-index:4;">
+            <img src="assets/d242f.png" alt="QR Code" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+
+          <!-- Center Logo inside QR -->
+          <div style="position:absolute; left:168px; top:401px; width:49.04px; height:49.04px; z-index:5;">
+            <img src="assets/9ea5e.svg" alt="" style="display:block; width:49.04px; height:49.04px;" />
+            <img src="assets/3bc60.svg" alt="" style="position:absolute; left:14px; top:9px; width:20.24px; height:25.69px;" />
+            <span style="position:absolute; left:9px; top:35px; font-size:6px; font-weight:800; color:#000;">BANK-KU</span>
+          </div>
+
+          <!-- Tambah Nominal Button -->
+          <div class="clickable" onclick="openQrNominalModal()" style="position:absolute; left:85.8px; top:619px; width:223.26px; height:49.25px; border-radius:15px; border:2px solid #ffffff; display:flex; align-items:center; justify-content:center; z-index:4;">
+            <span id="qr-terima-nominal-btn-text" style="font-size:20px; font-weight:600; color:#ffffff;">Tambah Nominal</span>
+          </div>
+
+          <!-- Bagikan QR Button -->
+          <div class="clickable" onclick="showToast('Tautan QR Terima berhasil dibagikan!')" style="position:absolute; left:86px; top:754px; width:220px; height:69px; display:flex; align-items:center; z-index:3;">
+            <img src="assets/ca536.svg" alt="Share" style="width:69px; height:69px; display:block;" />
+            <span style="font-size:20px; font-weight:800; color:#0d99ff; margin-left:6px;">Bagikan QR</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 6: SCAN QRIS (iPhone 16 - 96, node 404:543)
+           ========================================================= -->
+      <section id="screen-qr-scan" class="screen" data-node-id="404:543">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Back Arrow -->
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:12px; top:31px; width:34px; height:34px; z-index:4;">
+            <img src="assets/da4c0.svg" alt="Kembali" style="display:block; width:34px; height:34px;" />
+          </div>
+
+          <!-- QRIS Header Logo -->
+          <div style="position:absolute; left:146px; top:42px; width:102px; height:44px;">
+            <img src="assets/63737.png" alt="QRIS" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+
+          <!-- Camera Viewfinder Area (Click to simulate scan merchant) -->
+          <div class="clickable" onclick="selectRecipient('CBTL - PONDOK INDAH MALL', 'QRIS Merchant - Jakarta Selatan')" style="position:absolute; left:20px; top:95px; width:354px; height:682px; background:#969696; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;">
+            <!-- Interactive scanner frame overlay -->
+            <div style="width:230px; height:230px; border:3px dashed rgba(255,255,255,0.85); border-radius:24px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; text-align:center; background:rgba(0,0,0,0.18);">
+              <span style="color:#fff; font-weight:600; font-size:14px;">Ketuk area kamera untuk simulasi Scan QRIS Merchant</span>
+            </div>
+          </div>
+
+          <!-- Gallery Upload Button -->
+          <div class="clickable" onclick="selectRecipient('CBTL - PONDOK INDAH MALL', 'QRIS Merchant - Jakarta Selatan')" style="position:absolute; left:32px; top:680px; width:72px; height:72px; z-index:4;">
+            <img src="assets/1619a.svg" alt="" style="display:block; width:72px; height:72px;" />
+            <img src="assets/5637b.svg" alt="Upload" style="position:absolute; left:11px; top:12px; width:49px; height:49px;" />
+          </div>
+
+          <!-- Flashlight Button -->
+          <div class="clickable" onclick="showToast('Lampu senter diaktifkan')" style="position:absolute; left:291px; top:680px; width:72px; height:72px; z-index:4;">
+            <img src="assets/1619a.svg" alt="" style="display:block; width:72px; height:72px;" />
+            <img src="assets/34154.svg" alt="Flash" style="position:absolute; left:12px; top:12px; width:48px; height:48px;" />
+          </div>
+
+          <p style="position:absolute; left:16px; top:807px; font-size:16px; font-weight:500; color:#000; white-space:nowrap;">
+            Scan atau upload QR kode untuk membayar
+          </p>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 7: PEMBAYARAN VIRTUAL AKUN (iPhone 16 - 8, node 112:15)
+           ========================================================= -->
+      <section id="screen-virtual-account" class="screen" data-node-id="112:15">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p class="top-bar-title" style="left:calc(50% + 7px);">Pembayaran Virtual Akun</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/b8630.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Input Nomor Virtual Akun -->
+          <div style="position:absolute; left:16px; top:367px; width:362px; height:56px; background:rgba(217,217,217,0.64); border:1px solid #0b925c; border-radius:25px; display:flex; align-items:center; justify-content:center; padding:0 20px; z-index:3;">
+            <input id="va-number-input" type="text" class="clean-input" placeholder="masukan nomor virtual akun" value="8801234567890" style="width:100%; font-size:16px; text-align:center;" />
+          </div>
+
+          <!-- Virtual Akun Badge Box -->
+          <div style="position:absolute; left:43px; top:434px; width:310px; height:56.77px; background:rgba(217,217,217,0.65); border:1px solid #0b925c; border-radius:10px; z-index:3;"></div>
+          <div style="position:absolute; left:49px; top:437px; width:49.88px; height:49.88px; z-index:4;">
+            <img src="assets/7e5d2.svg" alt="" style="display:block; width:51.88px; height:51.88px;" />
+            <img src="assets/68f35.svg" alt="" style="position:absolute; left:14.25px; top:9.5px; width:20.58px; height:26.13px;" />
+            <span style="position:absolute; left:9.5px; top:35.6px; font-size:6px; font-weight:800; color:#000;">BANK-KU</span>
+          </div>
+          <p style="position:absolute; left:43px; top:447px; width:310px; font-size:20px; font-weight:600; color:#000; text-align:center; z-index:4;">
+            Virtual Akun
+          </p>
+
+          <p style="position:absolute; left:55px; top:502px; width:291px; font-size:16px; color:rgba(0,0,0,0.73); text-align:center; z-index:3;">
+            Pastikan Nomor Virtual Akun Tujuan Sudah Benar
+          </p>
+
+          <!-- Konfirmasi Button -->
+          <div class="clickable" onclick="confirmVirtualAccount()" style="position:absolute; left:57.3px; top:745px; width:271.38px; height:53.44px; z-index:3;">
+            <img src="assets/9289a.svg" alt="" style="display:block; width:271.38px; height:53.44px;" />
+            <img src="assets/3d979.svg" alt="Cart" style="position:absolute; left:19px; top:7px; width:39px; height:39px;" />
+            <span style="position:absolute; left:0; top:13px; width:100%; text-align:center; font-size:20px; font-weight:600; color:#fff;">Konfirmasi</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 8: TRANSFER DAFTAR REKENING (iPhone 16 - 24, node 208:32)
+           ========================================================= -->
+      <section id="screen-transfer" class="screen" data-node-id="208:32">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p class="top-bar-title">TRANSFER</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/b8630.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Search Bar -->
+          <div style="position:absolute; left:21px; top:148px; width:352px; height:56px; z-index:3;">
+            <img src="assets/ca90a.svg" alt="" style="display:block; width:352px; height:56px;" />
+            <!-- Search Magnifier SVG -->
+            <svg style="position:absolute; left:38px; top:14px; width:28px; height:28px;" viewBox="0 0 24 24" fill="none" stroke="#1d1b20" stroke-width="2.2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+            <input type="text" class="clean-input" oninput="filterContacts(this.value)" placeholder="Temukan rekening..." style="position:absolute; left:82px; top:12px; width:245px; height:32px; font-size:17px; font-weight:600;" />
+          </div>
+
+          <!-- Favorit Section -->
+          <p style="position:absolute; left:21px; top:240px; font-size:20px; font-weight:600; color:#000; z-index:3;">
+            Favorit
+          </p>
+          <p style="position:absolute; left:352px; top:247px; font-size:10px; color:#b0b0b0; z-index:3;">
+            Atur
+          </p>
+
+          <!-- Row 1 Favorit Avatars -->
+          <div class="clickable" onclick="selectRecipient('Daudy Ganteng', 'Bank-Ku - 8810293841')" style="position:absolute; left:32px; top:287px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/ba480.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:2px; line-height:1.15; margin-left:-12px; width:85px;">DAUDY Ganteng</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Daffa Suami Zee', 'Bank-Ku - 9920112233')" style="position:absolute; left:118px; top:287px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/ba480.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px; white-space:nowrap; margin-left:-18px;">Daffa Suami Zee</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Taufiq', 'Bank-Ku - 7740192837')" style="position:absolute; left:205px; top:287px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/ba480.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/c3c1b.svg" alt="" style="position:absolute; left:12px; top:11px; width:36.75px; height:36.75px;" />
+            <p style="font-size:12px; color:#000; margin-top:5px;">TAUFIQ</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Adhi Susilo', 'Bank-Ku - 442034229248')" style="position:absolute; left:292px; top:287px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/18ffc.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/be75d.svg" alt="" style="position:absolute; left:6px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px; white-space:nowrap; margin-left:-6px;">ADHI SUSILO</p>
+          </div>
+
+          <!-- Row 2 Favorit Avatars -->
+          <div class="clickable" onclick="selectRecipient('David', 'Bank-Ku - 5519283746')" style="position:absolute; left:32px; top:383px; width:59px; text-align:center; z-index:3;">
+            <img src="assets/0629c.svg" alt="" style="width:59px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px;">DAVID</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Tegar Herlangga', 'Bank-Ku - 6629384756')" style="position:absolute; left:118px; top:383px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/bfc02.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px; line-height:1.15; margin-left:-10px;">TEGAR<br/>HERLANGGA</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Jonathan', 'Bank-Ku - 3319283746')" style="position:absolute; left:205px; top:383px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/ba480.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px;">JONATHAN</p>
+          </div>
+
+          <div class="clickable" onclick="selectRecipient('Agus Salim', 'Bank-Ku - 2283746519')" style="position:absolute; left:292px; top:383px; width:60px; text-align:center; z-index:3;">
+            <img src="assets/bfc02.svg" alt="" style="width:60px; height:60px; display:block;" />
+            <img src="assets/d7f11.svg" alt="" style="position:absolute; left:5px; top:5px; width:49px; height:49px;" />
+            <p style="font-size:12px; color:#000; margin-top:6px; white-space:nowrap; margin-left:-5px;">AGUS SALIM</p>
+          </div>
+
+          <!-- Data Transfer Section -->
+          <p style="position:absolute; left:21px; top:494px; font-size:20px; font-weight:600; color:#000; z-index:3;">
+            Data Transfer
+          </p>
+          <p style="position:absolute; left:352px; top:501px; font-size:10px; color:#b0b0b0; z-index:3;">
+            Atur
+          </p>
+
+          <div style="position:absolute; left:21px; top:544px; width:157px; height:22px; border-radius:10px; background:#eeeeee; display:flex; align-items:center; justify-content:center; z-index:3;">
+            <span style="font-size:12px; color:#000;">Rekening Tersimpan</span>
+          </div>
+          <div style="position:absolute; left:178px; top:555px; width:188px; height:2px; z-index:3;">
+            <img src="assets/64284.svg" alt="" style="display:block; width:188px; height:2px;" />
+          </div>
+
+          <p style="position:absolute; left:31px; top:573px; font-size:15px; font-weight:600; color:#000; z-index:3;">
+            A
+          </p>
+
+          <div id="saved-contacts-container">
+            <!-- Saved Contact 1: Adhi Susilo -->
+            <div class="clickable saved-contact-row" data-name="Adhi Susilo" onclick="selectRecipient('Adhi Susilo', 'Bank-Ku - 442034229248')" style="position:absolute; left:31px; top:603px; width:330px; height:41px; z-index:3;">
+              <img src="assets/8ad20.svg" alt="" style="width:42px; height:41px; display:block;" />
+              <img src="assets/07e2a.svg" alt="" style="position:absolute; left:4px; top:4px; width:33px; height:33px;" />
+              <span style="position:absolute; left:56px; top:9px; font-size:15px; font-weight:600; color:#000;">Adhi Susilo</span>
+            </div>
+
+            <!-- Saved Contact 2: Agus Salim -->
+            <div class="clickable saved-contact-row" data-name="Agus Salim" onclick="selectRecipient('Agus Salim', 'Bank-Ku - 2283746519')" style="position:absolute; left:31px; top:656px; width:330px; height:41px; z-index:3;">
+              <img src="assets/8ad20.svg" alt="" style="width:42px; height:41px; display:block;" />
+              <img src="assets/7718e.svg" alt="" style="position:absolute; left:4px; top:4px; width:33px; height:33px;" />
+              <span style="position:absolute; left:54px; top:9px; font-size:15px; font-weight:600; color:#000;">Agus Salim</span>
+            </div>
+
+            <!-- Saved Contact 3: Adrian Maulana -->
+            <div class="clickable saved-contact-row" data-name="Adrian Maulana" onclick="selectRecipient('Adrian Maulana', 'Bank-Ku - 1102938475')" style="position:absolute; left:31px; top:711px; width:330px; height:40px; z-index:3;">
+              <img src="assets/7bfaa.svg" alt="" style="width:42px; height:40px; display:block;" />
+              <img src="assets/7718e.svg" alt="" style="position:absolute; left:4px; top:3px; width:33px; height:33px;" />
+              <span style="position:absolute; left:54px; top:8px; font-size:15px; font-weight:600; color:#000;">Adrian Maulana</span>
+            </div>
+          </div>
+
+          <!-- Transfer Ke Penerima Baru Button -->
+          <div class="clickable" onclick="openNewRecipientModal()" style="position:absolute; left:13px; top:776px; width:368px; height:61px; z-index:4;">
+            <img src="assets/008c4.svg" alt="" style="display:block; width:368px; height:61px;" />
+            <img src="assets/62470.svg" alt="" style="position:absolute; left:67px; top:17px; width:24px; height:24px;" />
+            <span style="position:absolute; left:102px; top:17px; font-size:16px; font-weight:600; color:#ffffff;">Transfer Ke Penerima Baru</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 8B: TRANSFER NOMINAL & DETAIL (iPhone 16 - 63, node 247:203)
+           ========================================================= -->
+      <section id="screen-transfer-detail" class="screen" data-node-id="247:203">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p class="top-bar-title">TRANSFER</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/19477.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Recipient Circle Icon -->
+          <div style="position:absolute; left:172px; top:156px; width:63px; height:64px;">
+            <img src="assets/13d4f.svg" alt="" style="display:block; width:63px; height:64px;" />
+            <img src="assets/12b58.svg" alt="" style="position:absolute; left:20px; top:20px; width:24px; height:24px;" />
+          </div>
+
+          <p id="tf-detail-name" style="position:absolute; left:44px; top:225px; width:310px; font-size:20px; font-weight:600; color:#000; text-align:center;">
+            Adhi Susilo
+          </p>
+          <p id="tf-detail-bank" style="position:absolute; left:44px; top:255px; width:310px; font-size:12px; color:#000; text-align:center;">
+            Bank-Ku - 442034229248
+          </p>
+
+          <!-- Nominal Input -->
+          <p style="position:absolute; left:39px; top:305px; font-size:12px; color:#000;">
+            Nominal
+          </p>
+          <input id="tf-detail-amount" type="text" class="clean-input" oninput="formatAmountInput(this)" value="Rp100.000" style="position:absolute; left:39px; top:318px; width:315px; font-size:24px; font-weight:600; color:#000;" />
+
+          <!-- Rekening Sumber Section -->
+          <div style="position:absolute; left:-2px; top:361px; width:395px; height:156px; background:#d9d9d9;"></div>
+          <p style="position:absolute; left:39px; top:374px; font-size:12px; color:#000;">
+            Rekening Sumber
+          </p>
+
+          <!-- Source Card -->
+          <div style="position:absolute; left:23px; top:399px; width:343px; height:83px; border-radius:5px; background:#ffffff;"></div>
+          <div style="position:absolute; left:276px; top:399px; width:90px; height:83px; border-radius:0 5px 5px 0; overflow:hidden;">
+            <img src="assets/a14d3.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+          <p style="position:absolute; left:38px; top:409px; font-size:12px; font-weight:500; color:#000;">
+            Tabungan Black Bisnis
+          </p>
+          <p style="position:absolute; left:38px; top:430px; font-size:12px; color:#000;">
+            1002884776559
+          </p>
+          <p style="position:absolute; left:38px; top:451px; font-size:12px; font-weight:700; background:linear-gradient(90deg, #0b925c, #3183d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+            Rp.10.000.000
+          </p>
+          <div style="position:absolute; left:23px; top:476px; width:253px; height:6px; border-radius:0 0 0 5px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%);"></div>
+
+          <!-- Tambah Keterangan -->
+          <div style="position:absolute; left:118px; top:531px; display:flex; align-items:center; gap:8px;">
+            <img src="assets/fbab3.svg" alt="" style="width:18.33px; height:18.34px; display:block;" />
+            <input type="text" class="clean-input" placeholder="Tambah Keterangan" style="font-size:12px; font-weight:600; color:#000; width:160px;" />
+          </div>
+
+          <!-- Lanjutkan Button -->
+          <div class="clickable" onclick="proceedToTransferPin()" style="position:absolute; left:16px; top:755px; width:361px; height:56px; border-radius:20px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; font-weight:700; color:#ffffff;">Lanjutkan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 8C: MASUKKAN PIN (iPhone 16 - 64, node 247:280)
+           ========================================================= -->
+      <section id="screen-pin" class="screen" data-node-id="247:280">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p id="pin-header-title" class="top-bar-title">TRANSFER</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/4a9d2.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <p style="position:absolute; left:0; top:147px; width:393px; font-size:20px; font-weight:600; color:#000; text-align:center;">
+            Masukkan PIN
+          </p>
+          <p style="position:absolute; left:0; top:243px; width:393px; font-size:12px; color:#000; text-align:center;">
+            Gunakan PIN BANK-KU Anda
+          </p>
+
+          <!-- 6 PIN Dots (interactive) -->
+          <div class="pin-dots-row">
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+          </div>
+
+          <!-- Keypad Area (top: 500px) -->
+          <div style="position:absolute; left:0; top:500px; width:393px; height:352px; background:#ffffff;"></div>
+
+          <!-- Row 1: 1, 2, 3 -->
+          <div class="clickable" onclick="pressPinDigit(1)" style="position:absolute; left:0; top:503px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">1</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(2)" style="position:absolute; left:134px; top:503px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">2</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(3)" style="position:absolute; left:268px; top:503px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">3</span>
+          </div>
+
+          <!-- Row 2: 4, 5, 6 -->
+          <div class="clickable" onclick="pressPinDigit(4)" style="position:absolute; left:0; top:590px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">4</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(5)" style="position:absolute; left:134px; top:590px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">5</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(6)" style="position:absolute; left:268px; top:590px; width:131px; height:84px;">
+            <img src="assets/301ef.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">6</span>
+          </div>
+
+          <!-- Row 3: 7, 8, 9 -->
+          <div class="clickable" onclick="pressPinDigit(7)" style="position:absolute; left:0; top:677px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">7</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(8)" style="position:absolute; left:134px; top:677px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">8</span>
+          </div>
+          <div class="clickable" onclick="pressPinDigit(9)" style="position:absolute; left:268px; top:677px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">9</span>
+          </div>
+
+          <!-- Row 4: Clear (left), 0 (center), Submit Arrow (right) -->
+          <div class="clickable" onclick="clearPinDigit()" style="position:absolute; left:26px; top:774px; width:80px; height:74px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#64748b;">
+            HAPUS
+          </div>
+          <div class="clickable" onclick="pressPinDigit(0)" style="position:absolute; left:134px; top:764px; width:131px; height:84px;">
+            <img src="assets/80e88.svg" alt="" style="width:131px; height:84px; display:block;" />
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#fff;">0</span>
+          </div>
+          <div class="clickable" onclick="submitPin()" style="position:absolute; left:297px; top:774px; width:74px; height:74px;">
+            <img src="assets/c84c1.svg" alt="Next" style="width:74px; height:74px; display:block;" />
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 8D: TRANSFER BERHASIL / RESI (iPhone 16 - 65, node 247:297)
+           ========================================================= -->
+      <section id="screen-transfer-success" class="screen" data-node-id="247:297">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p id="receipt-header-title" class="top-bar-title">TRANSFER</p>
+
+          <!-- Close X Kembali Button on Right -->
+          <div class="clickable" onclick="navigateTo('home', false)" style="position:absolute; right:12px; top:25px; width:75px; height:75px; z-index:5; text-align:center;">
+            <img src="assets/b6b9c.svg" alt="Tutup" style="width:38px; height:38px; margin:0 auto; display:block;" />
+            <span style="font-size:16px; color:#fff; display:block; margin-top:2px;">Kembali</span>
+          </div>
+
+          <!-- Green Checkmark Circle -->
+          <div style="position:absolute; left:167px; top:194px; width:59px; height:58px;">
+            <img src="assets/42f94.png" alt="Berhasil" style="width:59px; height:58px; display:block;" />
+          </div>
+
+          <p id="receipt-title" style="position:absolute; left:0; top:271px; width:393px; font-size:20px; font-weight:600; color:#000; text-align:center;">
+            Transfer Berhasil
+          </p>
+          <p id="receipt-timestamp" style="position:absolute; left:0; top:309px; width:393px; font-size:12px; color:#000; text-align:center;">
+            1 Mei 2025 - 10.22.03
+          </p>
+
+          <!-- Lihat Resi -->
+          <div class="clickable" onclick="showToast('Menampilkan detail resi lengkap')" style="position:absolute; left:146px; top:468px; width:100px; text-align:center;">
+            <img src="assets/0f933.svg" alt="" style="width:29px; height:9px; margin:0 auto 4px; display:block;" />
+            <span style="font-size:13px; color:#919191;">Lihat Resi</span>
+          </div>
+
+          <!-- Receipt Details Box -->
+          <div style="position:absolute; left:11px; top:523px; width:372px; height:198px; border-radius:5px; background:linear-gradient(180deg, #0b925c 0%, #3183d4 100%);"></div>
+          <p style="position:absolute; left:0; top:537px; width:393px; font-size:12px; color:#fff; text-align:center;">
+            Penerima
+          </p>
+          <p id="receipt-rec-name" style="position:absolute; left:0; top:555px; width:393px; font-size:20px; font-weight:600; color:#fff; text-align:center;">
+            Adhi Susilo
+          </p>
+          <p id="receipt-rec-bank" style="position:absolute; left:0; top:592px; width:393px; font-size:12px; color:#fff; text-align:center;">
+            Bank-Ku - 442034229248
+          </p>
+          <p style="position:absolute; left:0; top:634px; width:393px; font-size:12px; color:#fff; text-align:center;">
+            Nominal Transaksi
+          </p>
+          <p id="receipt-amount" style="position:absolute; left:0; top:655px; width:393px; font-size:20px; font-weight:600; color:#fff; text-align:center;">
+            Rp 100.000
+          </p>
+          <p style="position:absolute; left:0; top:688px; width:393px; font-size:12px; color:#fff; text-align:center;">
+            dari Joni Sutanto
+          </p>
+
+          <!-- Bagikan Resi Button -->
+          <div class="clickable" onclick="showToast('Resi transaksi berhasil dibagikan!')" style="position:absolute; left:11px; top:729px; width:372px; height:74px; border-radius:5px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); display:flex; align-items:center; justify-content:center; gap:10px;">
+            <img src="assets/cf95d.svg" alt="" style="width:14px; height:18.67px; display:block;" />
+            <span style="font-size:14px; font-weight:700; color:#fff;">Bagikan Resi</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 9: TOP UP MENU (iPhone 16 - 22, node 206:32)
+           ========================================================= -->
+      <section id="screen-topup" class="screen" data-node-id="206:32">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p style="position:absolute; left:116.5px; top:36px; font-size:20px; font-weight:600; color:#fff; z-index:3;">
+            Top Up
+          </p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/b8630.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- 1. E-Money -->
+          <div class="clickable" onclick="selectEwalletProvider('E-Money')" style="position:absolute; left:39px; top:225px; width:312px; height:86px; border-radius:15px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); z-index:3;">
+            <img src="assets/abbf1.svg" alt="" style="position:absolute; left:6px; top:10px; width:72px; height:63px;" />
+            <img src="assets/6c76e.svg" alt="" style="position:absolute; left:19px; top:25px; width:46px; height:36px;" />
+            <span style="position:absolute; left:114px; top:30px; font-size:20px; font-weight:600; color:#fff;">E - Money</span>
+          </div>
+
+          <!-- 2. E-Wallet -->
+          <div class="clickable" onclick="navigateTo('ewallet')" style="position:absolute; left:39px; top:344px; width:312px; height:86px; border-radius:15px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); z-index:3;">
+            <img src="assets/abbf1.svg" alt="" style="position:absolute; left:6px; top:14px; width:72px; height:63px;" />
+            <img src="assets/e4221.svg" alt="" style="position:absolute; left:25px; top:26px; width:34.76px; height:34.76px;" />
+            <span style="position:absolute; left:114px; top:30px; font-size:20px; font-weight:600; color:#fff;">E - Wallet</span>
+          </div>
+
+          <!-- 3. Pulsa -->
+          <div class="clickable" onclick="navigateTo('pulsa')" style="position:absolute; left:35.5px; top:470.5px; width:312px; height:86px; z-index:3;">
+            <img src="assets/3038b.svg" alt="" style="display:block; width:312px; height:86px;" />
+            <img src="assets/abbf1.svg" alt="" style="position:absolute; left:9.5px; top:8.5px; width:72px; height:63px;" />
+            <img src="assets/4d388.svg" alt="" style="position:absolute; left:12.5px; top:7.5px; width:65px; height:65px;" />
+            <span style="position:absolute; left:116px; top:25.5px; font-size:20px; font-weight:600; color:#fff;">Pulsa</span>
+          </div>
+
+          <!-- 4. Paket Data -->
+          <div class="clickable" onclick="navigateTo('pulsa')" style="position:absolute; left:39px; top:587px; width:312px; height:86px; border-radius:15px; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); z-index:3;">
+            <img src="assets/abbf1.svg" alt="" style="position:absolute; left:6px; top:11px; width:72px; height:63px;" />
+            <img src="assets/ee545.svg" alt="" style="position:absolute; left:24px; top:24px; width:35px; height:31px;" />
+            <span style="position:absolute; left:114px; top:25px; font-size:20px; font-weight:600; color:#fff;">Paket Data</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 9B: TOP UP E-WALLET (iPhone 16 - 28, node 206:279)
+           ========================================================= -->
+      <section id="screen-ewallet" class="screen" data-node-id="206:279">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:212px;" />
+            <img src="assets/5ab21.png" alt="" style="top:578px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p style="position:absolute; left:80px; top:36px; font-size:20px; font-weight:600; color:#fff; z-index:3;">
+            Top Up E - Wallet
+          </p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/c8911.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Shopeepay -->
+          <div class="clickable" onclick="selectEwalletProvider('Shopeepay')" style="position:absolute; left:39px; top:340px; width:148px; height:124px; background:#d9d9d9; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;">
+            <img src="assets/a53b1.png" alt="Shopeepay" style="width:57px; height:57px; display:block; margin-bottom:6px;" />
+            <span style="font-size:20px; font-weight:600; color:#000;">Shopeepay</span>
+          </div>
+
+          <!-- Dana -->
+          <div class="clickable" onclick="selectEwalletProvider('Dana')" style="position:absolute; left:197px; top:340px; width:148px; height:124px; background:#d9d9d9; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;">
+            <img src="assets/312d7.png" alt="Dana" style="width:57px; height:57px; display:block; margin-bottom:6px;" />
+            <span style="font-size:20px; font-weight:600; color:#000;">Dana</span>
+          </div>
+
+          <!-- GoPay -->
+          <div class="clickable" onclick="selectEwalletProvider('GoPay')" style="position:absolute; left:39px; top:475px; width:148px; height:124px; background:#d9d9d9; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;">
+            <img src="assets/ce8d0.png" alt="GoPay" style="width:57px; height:57px; display:block; margin-bottom:6px;" />
+            <span style="font-size:20px; font-weight:600; color:#000;">GoPay</span>
+          </div>
+
+          <!-- Ovo -->
+          <div class="clickable" onclick="selectEwalletProvider('Ovo')" style="position:absolute; left:197px; top:475px; width:148px; height:124px; background:#d9d9d9; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;">
+            <img src="assets/344c1.png" alt="Ovo" style="width:57px; height:57px; display:block; margin-bottom:6px;" />
+            <span style="font-size:20px; font-weight:600; color:#000;">Ovo</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 10: PULSA (iPhone 16 - 76, node 269:1022)
+           ========================================================= -->
+      <section id="screen-pulsa" class="screen" data-node-id="269:1022">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p style="position:absolute; left:88px; top:36px; font-size:20px; font-weight:600; color:#fff; z-index:3;">
+            Pulsa
+          </p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img src="assets/f425b.svg" alt="Kembali" style="position:absolute; left:10px; top:2px; width:53px; height:53px;" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Phone Number Input -->
+          <div style="position:absolute; left:16px; top:154px; width:362px; height:56px; background:rgba(217,217,217,0.64); border:1px solid #0b925c; border-radius:25px; display:flex; align-items:center; padding:0 28px; z-index:3;">
+            <input id="pulsa-phone-input" type="tel" class="clean-input" value="08898584858" placeholder="08************" style="width:100%; font-size:24px; color:#000;" />
+          </div>
+
+          <!-- Grid 8 Nominal Pulsa -->
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 5000, 7500)" style="left:18px; top:254px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 5.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 7.500</span>
+          </div>
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 10000, 12500)" style="left:219px; top:254px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 10.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 12.500</span>
+          </div>
+
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 20000, 22500)" style="left:18px; top:379px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 20.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 22.500</span>
+          </div>
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 30000, 32500)" style="left:219px; top:379px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 30.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 32.500</span>
+          </div>
+
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 40000, 42500)" style="left:18px; top:508px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 40.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 42.500</span>
+          </div>
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 50000, 52500)" style="left:219px; top:508px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 50.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 52.500</span>
+          </div>
+
+          <div class="pulsa-card" onclick="selectPulsaNominal(this, 70000, 72500)" style="left:18px; top:636px;">
+            <span style="font-size:24px; font-weight:700; color:#000;">Rp. 70.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 72.500</span>
+          </div>
+          <div class="pulsa-card selected" onclick="selectPulsaNominal(this, 100000, 102500)" style="left:219px; top:636px;">
+            <span style="font-size:23px; font-weight:700; color:#000;">Rp. 100.000</span>
+            <span style="font-size:13px; font-weight:700; color:rgba(0,0,0,0.5); margin-top:6px;">Rp 102.500</span>
+          </div>
+
+          <!-- Konfirmasi Button -->
+          <div class="clickable" onclick="confirmPulsaPurchase()" style="position:absolute; left:57.3px; top:761px; width:271.38px; height:53.44px; z-index:3;">
+            <img src="assets/9289a.svg" alt="" style="display:block; width:271.38px; height:53.44px;" />
+            <span style="position:absolute; left:0; top:13px; width:100%; text-align:center; font-size:20px; font-weight:600; color:#fff;">Konfirmasi</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 11: RIWAYAT TRANSAKSI (iPhone 16 - 106, node 417:219)
+           ========================================================= -->
+      <section id="screen-history" class="screen" data-node-id="417:219">
+        <div style="position:absolute; inset:0; background:#ffffff;">
+          <div class="coin-bg">
+            <img src="assets/5ab21.png" alt="" style="top:0;" />
+            <img src="assets/5ab21.png" alt="" style="top:289px;" />
+            <img src="assets/5ab21.png" alt="" style="top:584px;" />
+          </div>
+
+          <!-- Header -->
+          <div class="top-bar-grad"></div>
+          <p class="top-bar-title" style="left:calc(50% + 7px);">Riwayat Transaksi</p>
+          <div class="back-btn-group" onclick="goBack()">
+            <img class="back-icon" src="assets/b8630.svg" alt="Kembali" />
+            <span class="back-label">Kembali</span>
+          </div>
+
+          <!-- Balance & Account Summary -->
+          <p id="history-balance-text" style="position:absolute; left:60px; top:288px; width:274px; font-size:32px; font-weight:800; color:#050404; text-align:center; z-index:3;">
+            Rp 7.505.000,00
+          </p>
+          <p style="position:absolute; left:130px; top:325px; width:134px; font-size:16px; font-weight:500; color:#050404; text-align:center; z-index:3;">
+            Nomor Rekening
+          </p>
+          <p id="history-account-number" style="position:absolute; left:130px; top:349px; width:134px; font-size:16px; font-weight:500; color:#050404; text-align:center; z-index:3;">
+            123-456-7890
+          </p>
+          <div class="clickable" onclick="copyText(appState.accountNumber, 'Nomor Rekening')" style="position:absolute; left:264px; top:349px; width:24px; height:24px; z-index:3;">
+            <img src="assets/7f9a8.svg" alt="Copy" style="width:24px; height:24px; display:block;" />
+          </div>
+
+          <!-- Month Selector Bar -->
+          <div style="position:absolute; left:-1px; top:455px; width:394px; height:63px; border-radius:50px 50px 0 0; background:linear-gradient(90deg, #0b925c 0%, #3183d4 100%); z-index:3;"></div>
+          <div id="history-month-pill" style="position:absolute; left:10px; top:480px; width:86px; height:22px; border-radius:100px; background:#033961; transition:left 0.2s ease; z-index:3;"></div>
+
+          <span class="clickable" onclick="selectHistoryMonth('OKTOBER', this)" style="position:absolute; left:4px; top:480px; width:95px; font-size:15px; font-weight:800; color:#fff; text-align:center; z-index:4;">OKTOBER</span>
+          <span class="clickable" onclick="selectHistoryMonth('NOVEMBER', this)" style="position:absolute; left:104px; top:480px; width:95px; font-size:15px; font-weight:800; color:#fff; text-align:center; z-index:4;">NOVEMBER</span>
+          <span class="clickable" onclick="selectHistoryMonth('DESEMBER', this)" style="position:absolute; left:204px; top:480px; width:95px; font-size:15px; font-weight:800; color:#fff; text-align:center; z-index:4;">DESEMBER</span>
+          <span class="clickable" onclick="selectHistoryMonth('JANUARI', this)" style="position:absolute; left:304px; top:480px; width:81px; font-size:15px; font-weight:800; color:#fff; text-align:center; z-index:4;">JANUARI</span>
+
+          <!-- White List Background -->
+          <div style="position:absolute; left:0; top:515px; width:393px; height:337px; background:#ffffff; z-index:3;"></div>
+          <p style="position:absolute; left:10px; top:518px; width:90px; font-size:16px; font-weight:500; color:rgba(5,4,4,0.42); z-index:4;">
+            Transaksi
+          </p>
+
+          <!-- Dynamic Transactions Container -->
+          <div id="history-tx-list" style="position:relative; z-index:4;"></div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 12: PENGATURAN (iPhone 16 - 54, node 222:303)
+           ========================================================= -->
+      <section id="screen-settings" class="screen" data-node-id="222:303">
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, #3183d4 0%, #0b925c 100%);">
+          <!-- Back Arrow -->
+          <div class="clickable" onclick="goBack()" style="position:absolute; left:9px; top:25px; width:34px; height:34px;">
+            <img src="assets/da4c0.svg" alt="Kembali" style="width:34px; height:34px; display:block;" />
+          </div>
+
+          <!-- Group 1: Keamanan Akun -->
+          <div style="position:absolute; left:14px; top:145px; width:370px; height:157px; border-radius:10px; background:#d9d9d9;"></div>
+          <p style="position:absolute; left:30px; top:154px; font-size:16px; font-weight:600; color:#000;">
+            Keamanan Akun
+          </p>
+
+          <!-- Ubah Password Login -->
+          <div class="clickable" onclick="showToast('Membuka pengaturan Password Login')" style="position:absolute; left:23px; top:185px; width:337px; height:26px;">
+            <img src="assets/6892a.svg" alt="" style="position:absolute; left:0; top:0; width:24px; height:24px;" />
+            <span style="position:absolute; left:29px; top:0; font-size:16px; font-weight:600; color:#000;">Ubah Password Login</span>
+            <img src="assets/3acb9.svg" alt="" style="position:absolute; left:313px; top:0; width:24px; height:24px;" />
+          </div>
+          <div style="position:absolute; left:35px; top:217px; width:323px; height:1px;">
+            <img src="assets/aa9e8.svg" alt="" style="width:323px; height:1px; display:block;" />
+          </div>
+
+          <!-- Ubah Pin Transaksi -->
+          <div class="clickable" onclick="startChangePinFlow()" style="position:absolute; left:23px; top:226px; width:337px; height:26px;">
+            <img src="assets/3ec8a.svg" alt="" style="position:absolute; left:0; top:0; width:24px; height:24px;" />
+            <span style="position:absolute; left:29px; top:0; font-size:16px; font-weight:600; color:#000;">Ubah Pin Transaksi</span>
+            <img src="assets/3acb9.svg" alt="" style="position:absolute; left:313px; top:0; width:24px; height:24px;" />
+          </div>
+          <div style="position:absolute; left:35px; top:260px; width:323px; height:1px;">
+            <img src="assets/aa9e8.svg" alt="" style="width:323px; height:1px; display:block;" />
+          </div>
+
+          <!-- Atur Biometrik -->
+          <div class="clickable" onclick="showToast('Biometrik Sidik Jari aktif')" style="position:absolute; left:23px; top:267px; width:337px; height:26px;">
+            <img src="assets/ee752.svg" alt="" style="position:absolute; left:0; top:0; width:24px; height:24px;" />
+            <span style="position:absolute; left:29px; top:0; font-size:16px; font-weight:600; color:#000;">Atur Biometrik</span>
+            <img src="assets/3acb9.svg" alt="" style="position:absolute; left:313px; top:0; width:24px; height:24px;" />
+          </div>
+
+          <!-- Group 2: Pengaturan Aplikasi -->
+          <div style="position:absolute; left:12px; top:313px; width:372px; height:75px; border-radius:10px; background:#d9d9d9;"></div>
+          <p style="position:absolute; left:30px; top:320px; font-size:16px; font-weight:600; color:#000;">
+            Pengaturan Aplikasi
+          </p>
+          <div style="position:absolute; left:23px; top:353px; width:24px; height:24px;">
+            <img src="assets/d1656.svg" alt="" style="width:18px; height:22px; display:block; margin-left:3px;" />
+          </div>
+          <p style="position:absolute; left:52px; top:354px; font-size:16px; font-weight:600; color:#000;">
+            Notifikasi
+          </p>
+          <div class="toggle-switch" onclick="this.classList.toggle('off'); showToast('Pengaturan notifikasi diperbarui');">
+            <div class="toggle-knob"></div>
+          </div>
+
+          <!-- Group 3: Akun -->
+          <div style="position:absolute; left:12px; top:405px; width:370px; height:116px; border-radius:10px; background:#d9d9d9;"></div>
+          <p style="position:absolute; left:28px; top:414px; font-size:16px; font-weight:600; color:#000;">
+            Akun
+          </p>
+
+          <!-- Ubah Nama Panggilan -->
+          <div class="clickable" onclick="changeNicknamePrompt()" style="position:absolute; left:17px; top:441px; width:343px; height:32px;">
+            <img src="assets/e4691.svg" alt="" style="position:absolute; left:4px; top:2px; width:23.33px; height:28.67px;" />
+            <span style="position:absolute; left:33px; top:4px; font-size:16px; font-weight:600; color:#000;">Ubah Nama Panggilan</span>
+            <img src="assets/3acb9.svg" alt="" style="position:absolute; left:317px; top:4px; width:24px; height:24px;" />
+          </div>
+          <div style="position:absolute; left:33px; top:477px; width:323px; height:1px;">
+            <img src="assets/aa9e8.svg" alt="" style="width:323px; height:1px; display:block;" />
+          </div>
+
+          <!-- Ubah Nomor -->
+          <div class="clickable" onclick="showToast('OTP verifikasi nomor dikirim ke +62 8898584858')" style="position:absolute; left:20px; top:484px; width:340px; height:28px;">
+            <img src="assets/2a28e.svg" alt="" style="position:absolute; left:0; top:0; width:24px; height:24px;" />
+            <span style="position:absolute; left:30px; top:2px; font-size:16px; font-weight:600; color:#000;">Ubah Nomor</span>
+            <img src="assets/3acb9.svg" alt="" style="position:absolute; left:314px; top:2px; width:24px; height:24px;" />
+          </div>
+
+          <!-- Group 4: Bantuan -->
+          <div class="clickable" onclick="showToast('Menghubungi Call Center BANK-KU 121212...')" style="position:absolute; left:14px; top:535px; width:369px; height:82px; border-radius:10px; background:#d9d9d9;">
+            <p style="position:absolute; left:17px; top:8px; font-size:16px; font-weight:600; color:#000;">
+              Bantuan
+            </p>
+            <img src="assets/4cea4.svg" alt="" style="position:absolute; left:15px; top:44px; width:18px; height:21px;" />
+            <p style="position:absolute; left:46px; top:42px; font-size:16px; font-weight:600; color:#000;">
+              Hubungi Call Center 121212
+            </p>
+          </div>
+
+          <!-- Keluar Button -->
+          <div class="clickable" onclick="showToast('Anda telah keluar dari akun'); navigateTo('welcome', false);" style="position:absolute; left:0; top:779px; width:393px; height:73px; background:red; display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:32px; font-weight:700; color:#ffffff;">Keluar</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           MODAL 1: TRANSFER KE PENERIMA BARU
+           ========================================================= -->
+      <div id="modal-new-recipient" class="modal-backdrop" onclick="if(event.target===this) closeModals()">
+        <div class="modal-sheet">
+          <h3 style="font-size:18px; font-weight:700; margin-bottom:14px;">Transfer ke Penerima Baru</h3>
+          <label style="font-size:12px; color:#475569; display:block; margin-bottom:4px;">Nama Bank</label>
+          <input id="new-rec-bank" type="text" value="Bank-Ku" style="width:100%; padding:10px 14px; border:1px solid #3183d4; border-radius:10px; font-family:'Poppins',sans-serif; margin-bottom:10px;" />
+
+          <label style="font-size:12px; color:#475569; display:block; margin-bottom:4px;">Nomor Rekening</label>
+          <input id="new-rec-acc" type="text" value="442034229248" style="width:100%; padding:10px 14px; border:1px solid #3183d4; border-radius:10px; font-family:'Poppins',sans-serif; margin-bottom:10px;" />
+
+          <label style="font-size:12px; color:#475569; display:block; margin-bottom:4px;">Nama Penerima</label>
+          <input id="new-rec-name" type="text" value="Adhi Susilo" style="width:100%; padding:10px 14px; border:1px solid #3183d4; border-radius:10px; font-family:'Poppins',sans-serif; margin-bottom:18px;" />
+
+          <div style="display:flex; gap:10px;">
+            <button onclick="closeModals()" style="flex:1; padding:12px; border-radius:12px; border:1px solid #cbd5e1; background:#f8fafc; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer;">Batal</button>
+            <button onclick="confirmNewRecipient()" style="flex:2; padding:12px; border-radius:12px; border:none; background:linear-gradient(90deg, #0b925c, #3183d4); color:#fff; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer;">Lanjutkan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           MODAL 2: TAMBAH NOMINAL QR TERIMA (Frame 4, node 248:139)
+           ========================================================= -->
+      <div id="modal-qr-nominal" class="modal-backdrop" onclick="if(event.target===this) closeModals()">
+        <div class="modal-sheet">
+          <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;">Tambah Nominal QR Terima</h3>
+          <label style="font-size:13px; color:#475569; display:block; margin-bottom:6px;">Masukkan Nominal (Rp)</label>
+          <input id="qr-nominal-input" type="text" placeholder="Contoh: 50000" style="width:100%; padding:12px 14px; border:1.5px solid #0b925c; border-radius:14px; font-family:'Poppins',sans-serif; font-size:16px; margin-bottom:18px;" />
+          <div style="display:flex; gap:10px;">
+            <button onclick="closeModals()" style="flex:1; padding:12px; border-radius:12px; border:1px solid #cbd5e1; background:#f8fafc; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer;">Batal</button>
+            <button onclick="saveQrNominal()" style="flex:2; padding:12px; border-radius:12px; border:none; background:linear-gradient(90deg, #0b925c, #3183d4); color:#fff; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer;">Konfirmasi</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           MODAL 3: SQLITE DATABASE INSPECTOR (mbanking.db)
+           ========================================================= -->
+      <div id="modal-db-inspector" class="modal-backdrop" onclick="if(event.target===this) closeModals()">
+        <div class="modal-sheet">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <h3 style="font-size:16px; font-weight:700;">Isi Database SQLite (mbanking.db)</h3>
+            <span style="font-size:11px; background:#dcfce7; color:#166534; padding:2px 8px; border-radius:99px; font-weight:600;">3 Tabel</span>
+          </div>
+          <div id="db-inspector-content"></div>
+          <div style="display:flex; gap:10px; margin-top:14px;">
+            <button onclick="resetDatabaseToDefault()" style="flex:1; padding:10px; border-radius:10px; border:1px solid #fca5a5; background:#fef2f2; color:#dc2626; font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; cursor:pointer;">Reset Data Awal</button>
+            <button onclick="closeModals()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#0f172a; color:#fff; font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; cursor:pointer;">Tutup</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
